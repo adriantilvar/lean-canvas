@@ -2,12 +2,12 @@ import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 
 const config: Config = {
-  darkMode: "selector",
+  darkMode: ["selector", "class"],
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       listStyleType: {
-        hyphen: "'―  '",
+        hyphen: "―  ",
         circle: "circle",
       },
       spacing: {
@@ -20,6 +20,12 @@ const config: Config = {
         "288": "1152px",
         "320": "1280px",
       },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      colors: {},
     },
     fontSize: {
       xs: ["14px", "20px"],
