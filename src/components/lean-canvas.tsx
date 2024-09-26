@@ -215,7 +215,7 @@ const LeanCanvas = ({ className }: LeanCanvasProps) => {
                   {contentLines.length >= 6 && <p>...</p>}
                 </div>
               ) : (
-                <p className="hidden text-sm opacity-50 group-hover:block">
+                <p className="hidden text-sm opacity-50 xl:group-hover:block">
                   {block.description}
                 </p>
               )}
