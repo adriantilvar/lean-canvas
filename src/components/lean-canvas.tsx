@@ -187,7 +187,7 @@ const LeanCanvas = ({ className }: LeanCanvasProps) => {
           <Card
             key={block.id}
             className={cn(
-              "group select-none hover:cursor-pointer md:min-h-24 xl:min-h-32",
+              "group select-none hover:cursor-pointer md:min-h-24 xl:min-h-36",
               block.theme,
               block.layout
             )}
