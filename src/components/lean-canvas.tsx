@@ -227,7 +227,7 @@ const LeanCanvas = ({ className }: LeanCanvasProps) => {
       {selectedCard && (
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogContent
-            className={cn("h-full pb-20 sm:h-96 sm:w-128 sm:pb-0")}
+            className={cn("h-full pb-20 sm:h-96 sm:w-128 sm:pb-6")}
           >
             <DialogHeader>
               <DialogTitle>
