@@ -44,7 +44,8 @@ type CanvasBlock = {
   icon: React.ReactNode;
   title: string;
   description: string;
-  styling: string;
+  theme: string;
+  layout: string;
 };
 
 const canvasCards: CanvasBlock[] = [
@@ -53,24 +54,24 @@ const canvasCards: CanvasBlock[] = [
     icon: <LockKeyhole className="h-3 w-3" />,
     title: "Problem",
     description: "List the 1-3 problems",
-    styling:
-      "border-pink-200 bg-pink-200 text-pink-950 xl:row-start-1 xl:col-span-2",
+    theme: "border-pink-200 bg-pink-100 text-pink-950",
+    layout: "xl:row-start-1 xl:col-span-2",
   },
   {
     id: "existing-alternatives",
     icon: <Split className="h-3 w-3" />,
     title: "Existing Alternatives",
     description: "List how the problems are solved today",
-    styling:
-      "border-pink-200 bg-pink-200 text-pink-950 xl:row-start-2 xl:col-span-2",
+    theme: "border-pink-200 bg-pink-100 text-pink-950",
+    layout: "xl:row-start-2 xl:col-span-2",
   },
   {
     id: "solution",
     icon: <Key className="h-3 w-3 rotate-90" />,
     title: "Solution",
     description: "Outline a possible solution for each problem",
-    styling:
-      "border-yellow-200 bg-yellow-100 text-yellow-950 xl:row-start-1 xl:col-span-2",
+    theme: "border-yellow-200 bg-yellow-100 text-yellow-950",
+    layout: "xl:row-start-1 xl:col-span-2",
   },
   {
     id: "key-metrics",
@@ -78,8 +79,8 @@ const canvasCards: CanvasBlock[] = [
     title: "Key Metrics",
     description:
       "List the key numbers that tell you how your business is doing",
-    styling:
-      "border-orange-200 bg-orange-100 text-orange-950 xl:row-start-2 xl:col-span-2",
+    theme: "border-orange-200 bg-orange-100 text-orange-950",
+    layout: "xl:row-start-2 xl:col-span-2",
   },
   {
     id: "unique-value-proposition",
@@ -87,64 +88,64 @@ const canvasCards: CanvasBlock[] = [
     title: "Unique Value Proposition",
     description:
       "Single, clear, compelling message that states why you are different and worth paying attention",
-    styling:
-      "border-violet-200 bg-violet-100 text-violet-950 xl:row-start-1 xl:col-span-2",
+    theme: "border-violet-200 bg-violet-100 text-violet-950",
+    layout: "xl:row-start-1 xl:col-span-2",
   },
   {
     id: "high-level-concept",
     icon: <Sparkle className="h-3 w-3" />,
     title: "High Level Concept",
     description: "Write your X for Y analogy",
-    styling:
-      "border-violet-200 bg-violet-100 text-violet-950 xl:row-start-2 xl:col-span-2",
+    theme: "border-violet-200 bg-violet-100 text-violet-950",
+    layout: "xl:row-start-2 xl:col-span-2",
   },
   {
     id: "unfair-advantage",
     icon: <Castle className="h-3 w-3" />,
     title: "Unfair Advantage",
     description: "Something that cannot be easily bought or copied",
-    styling:
-      "border-amber-200 bg-amber-100 text-amber-950 xl:row-start-1 xl:col-span-2",
+    theme: "border-amber-200 bg-amber-100 text-amber-950",
+    layout: "xl:row-start-1 xl:col-span-2",
   },
   {
     id: "channels",
     icon: <Route className="h-3 w-3" />,
     title: "Channels",
     description: "Write your path to customers (inbound or outbound)",
-    styling:
-      "border-cyan-200 bg-cyan-100 text-cyan-950 xl:row-start-2 xl:col-span-2",
+    theme: "border-cyan-200 bg-cyan-100 text-cyan-950",
+    layout: "xl:row-start-2 xl:col-span-2",
   },
   {
     id: "customer-segments",
     icon: <Users className="h-3 w-3" />,
     title: "Customer Segments",
     description: "List your target customers and users",
-    styling:
-      "border-sky-200 bg-sky-100 text-sky-950 xl:row-start-1 xl:col-span-2",
+    theme: "border-sky-200 bg-sky-100 text-sky-950",
+    layout: "xl:row-start-1 xl:col-span-2",
   },
   {
     id: "early-adopters",
     icon: <UserCheck className="h-3 w-3" />,
     title: "Early adopters",
     description: "List the characteristics of your ideal customers",
-    styling:
-      "border-sky-200 bg-sky-100 text-sky-950 xl:row-start-2 xl:col-span-2",
+    theme: "border-sky-200 bg-sky-100 text-sky-950",
+    layout: "xl:row-start-2 xl:col-span-2",
   },
   {
     id: "cost-structure",
     icon: <ReceiptText className="h-3 w-3" />,
     title: "Cost Structure",
     description: "List your fixed and variable costs",
-    styling:
-      "border-red-200 bg-red-100 text-red-950 xl:row-start-3 xl:col-span-5",
+    theme: "border-red-200 bg-red-100 text-red-950",
+    layout: "xl:row-start-3 xl:col-span-5",
   },
   {
     id: "revenue-streams",
     icon: <CircleDollarSign className="h-3 w-3" />,
     title: "Revenue Streams",
     description: "List your sources of revenue",
-    styling:
-      "border-green-200 bg-green-100 text-green-950 xl:row-start-3 xl:col-span-5",
+    theme: "border-green-200 bg-green-100 text-green-950",
+    layout: "xl:row-start-3 xl:col-span-5",
   },
 ];
 
@@ -171,7 +172,7 @@ const LeanCanvas = ({ className }: LeanCanvasProps) => {
   return (
     <div
       className={cn(
-        "grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-10 xl:grid-rows-3",
+        "grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-10",
         className
       )}
     >
@@ -186,8 +187,9 @@ const LeanCanvas = ({ className }: LeanCanvasProps) => {
           <Card
             key={block.id}
             className={cn(
-              "group select-none hover:cursor-pointer",
-              block.styling
+              "group select-none hover:cursor-pointer md:min-h-24 xl:min-h-32",
+              block.theme,
+              block.layout
             )}
             onClick={() => {
               setSelectedCard(block);
@@ -224,10 +226,12 @@ const LeanCanvas = ({ className }: LeanCanvasProps) => {
 
       {selectedCard && (
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogContent className="h-full bg-zinc-50 sm:h-96 sm:w-128">
+          <DialogContent className={cn("h-full sm:h-96 sm:w-128")}>
             <DialogHeader>
-              <DialogTitle className="text-zinc-800">
-                {selectedCard.title}
+              <DialogTitle className="">
+                <span className="inline-flex items-center gap-1">
+                  {selectedCard.icon} {selectedCard.title}
+                </span>
               </DialogTitle>
               <DialogDescription>{selectedCard.description}</DialogDescription>
             </DialogHeader>
@@ -240,7 +244,7 @@ const LeanCanvas = ({ className }: LeanCanvasProps) => {
 
             <DialogFooter className="flex-row justify-between">
               <DialogClose asChild>
-                <Button size="sm" variant="outline" className="bg-zinc-50">
+                <Button size="sm" variant="outline">
                   Drop
                 </Button>
               </DialogClose>

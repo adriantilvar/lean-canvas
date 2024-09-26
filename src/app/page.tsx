@@ -3,7 +3,7 @@ import LeanCanvas from "@/components/lean-canvas";
 export default function Home() {
   return (
     <div className="flex h-full flex-col">
-      <h1 className="text-3xl font-semibold text-zinc-800">
+      <h1 className="text-xl font-semibold text-zinc-800 sm:text-2xl">
         Lean Canvas Builder
       </h1>
 
