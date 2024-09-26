@@ -226,9 +226,11 @@ const LeanCanvas = ({ className }: LeanCanvasProps) => {
 
       {selectedCard && (
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogContent className={cn("h-full sm:h-96 sm:w-128")}>
+          <DialogContent
+            className={cn("h-full pb-20 sm:h-96 sm:w-128 sm:pb-0")}
+          >
             <DialogHeader>
-              <DialogTitle className="">
+              <DialogTitle>
                 <span className="inline-flex items-center gap-1">
                   {selectedCard.icon} {selectedCard.title}
                 </span>
