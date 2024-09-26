@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import type { BlockName } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 import {
   Form,
@@ -17,10 +18,11 @@ import { useCanvasStore } from "@/stores/canvas-store";
 
 type BlockFormProps = {
   blockId: BlockName;
+  className?: string;
   submitRef: React.RefObject<HTMLButtonElement>;
 };
 
-const BlockForm = ({ blockId, submitRef }: BlockFormProps) => {
+const BlockForm = ({ blockId, className, submitRef }: BlockFormProps) => {
   const setBlock = useCanvasStore((state) => state.setBlock);
   const getBlock = useCanvasStore((state) => state.getBlock);
 
@@ -41,22 +43,22 @@ const BlockForm = ({ blockId, submitRef }: BlockFormProps) => {
 
     const [blockId, value] = Object.entries(form.getValues())[0];
 
-    setBlock(blockId as BlockName, value);
+    setBlock(blockId as BlockName, value.trim());
   };
 
   return (
     <Form {...form}>
-      <form action={onActionHandler}>
+      <form action={onActionHandler} className={cn("flex flex-col", className)}>
         <FormField
           control={form.control}
           name={blockId}
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="flex flex-1">
               <FormControl>
                 <Textarea
                   {...field}
                   placeholder="Begin writing..."
-                  className="h-24"
+                  className="flex-1"
                 />
               </FormControl>
               <FormMessage />

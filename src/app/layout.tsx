@@ -21,7 +21,9 @@ export default function RootLayout({
         />
       </head>
       <body className="h-screen w-screen">
-        <main className="h-full p-6">{children}</main>
+        <main className="h-full overflow-scroll bg-zinc-100 p-6">
+          {children}
+        </main>
       </body>
     </html>
   );

@@ -4,6 +4,21 @@ import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
 import type { ClassValue } from "clsx";
+import {
+  Castle,
+  ChartLine,
+  CircleDollarSign,
+  Gem,
+  Key,
+  LoaderCircle,
+  LockKeyhole,
+  ReceiptText,
+  Route,
+  Sparkle,
+  Split,
+  UserCheck,
+  Users,
+} from "lucide-react";
 
 import { useIsComponentMounted } from "@/lib/hooks";
 import type { BlockName } from "@/lib/types";
@@ -22,18 +37,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import CastleIcon from "@/icons/castle";
-import ChartLineIcon from "@/icons/chart-line";
-import CircleDollarSignIcon from "@/icons/circle-dollar-sign";
-import GemIcon from "@/icons/gem";
-import KeyIcon from "@/icons/key";
-import LockKeyholeIcon from "@/icons/lock-keyhole";
-import ReceiptTextIcon from "@/icons/receipts-text";
-import RouteIcon from "@/icons/route";
-import SparkleIcon from "@/icons/sparkle";
-import SplitIcon from "@/icons/split";
-import UserCheckIcon from "@/icons/user-check";
-import UsersIcon from "@/icons/users";
 import { useCanvasStore } from "@/stores/canvas-store";
 
 type CanvasBlock = {
@@ -47,7 +50,7 @@ type CanvasBlock = {
 const canvasCards: CanvasBlock[] = [
   {
     id: "problem",
-    icon: <LockKeyholeIcon className="h-3 w-3" />,
+    icon: <LockKeyhole className="h-3 w-3" />,
     title: "Problem",
     description: "List the 1-3 problems",
     styling:
@@ -55,7 +58,7 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "existing-alternatives",
-    icon: <SplitIcon className="h-3 w-3" />,
+    icon: <Split className="h-3 w-3" />,
     title: "Existing Alternatives",
     description: "List how the problems are solved today",
     styling:
@@ -63,7 +66,7 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "solution",
-    icon: <KeyIcon className="h-3 w-3 rotate-90" />,
+    icon: <Key className="h-3 w-3 rotate-90" />,
     title: "Solution",
     description: "Outline a possible solution for each problem",
     styling:
@@ -71,7 +74,7 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "key-metrics",
-    icon: <ChartLineIcon className="h-3 w-3" />,
+    icon: <ChartLine className="h-3 w-3" />,
     title: "Key Metrics",
     description:
       "List the key numbers that tell you how your business is doing",
@@ -80,7 +83,7 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "unique-value-proposition",
-    icon: <GemIcon className="h-3 w-3" />,
+    icon: <Gem className="h-3 w-3" />,
     title: "Unique Value Proposition",
     description:
       "Single, clear, compelling message that states why you are different and worth paying attention",
@@ -89,7 +92,7 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "high-level-concept",
-    icon: <SparkleIcon className="h-3 w-3" />,
+    icon: <Sparkle className="h-3 w-3" />,
     title: "High Level Concept",
     description: "Write your X for Y analogy",
     styling:
@@ -97,7 +100,7 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "unfair-advantage",
-    icon: <CastleIcon className="h-3 w-3" />,
+    icon: <Castle className="h-3 w-3" />,
     title: "Unfair Advantage",
     description: "Something that cannot be easily bought or copied",
     styling:
@@ -105,7 +108,7 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "channels",
-    icon: <RouteIcon className="h-3 w-3" />,
+    icon: <Route className="h-3 w-3" />,
     title: "Channels",
     description: "Write your path to customers (inbound or outbound)",
     styling:
@@ -113,7 +116,7 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "customer-segments",
-    icon: <UsersIcon className="h-3 w-3" />,
+    icon: <Users className="h-3 w-3" />,
     title: "Customer Segments",
     description: "List your target customers and users",
     styling:
@@ -121,7 +124,7 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "early-adopters",
-    icon: <UserCheckIcon className="h-3 w-3" />,
+    icon: <UserCheck className="h-3 w-3" />,
     title: "Early adopters",
     description: "List the characteristics of your ideal customers",
     styling:
@@ -129,7 +132,7 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "cost-structure",
-    icon: <ReceiptTextIcon className="h-3 w-3" />,
+    icon: <ReceiptText className="h-3 w-3" />,
     title: "Cost Structure",
     description: "List your fixed and variable costs",
     styling:
@@ -137,7 +140,7 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "revenue-streams",
-    icon: <CircleDollarSignIcon className="h-3 w-3" />,
+    icon: <CircleDollarSign className="h-3 w-3" />,
     title: "Revenue Streams",
     description: "List your sources of revenue",
     styling:
@@ -158,22 +161,34 @@ const LeanCanvas = ({ className }: LeanCanvasProps) => {
   const isMounted = useIsComponentMounted();
   const getBlock = useCanvasStore((state) => state.getBlock);
 
-  if (!isMounted) return <p>Loading...</p>;
+  if (!isMounted)
+    return (
+      <div className="flex h-screen w-screen items-center justify-center">
+        <LoaderCircle className="h-20 w-20 animate-spin text-zinc-600" />
+      </div>
+    );
 
   return (
     <div
       className={cn(
-        "grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-10",
+        "grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-10 xl:grid-rows-3",
         className
       )}
     >
       {canvasCards.map((block) => {
-        const blockValue = getBlock(toCamelCase(block.id) as BlockName);
+        const content = getBlock(toCamelCase(block.id) as BlockName);
+        const hasContent = content !== "";
+        const contentLines = hasContent ? content.split("\n") : [];
+        const displayLines =
+          contentLines.length > 6 ? contentLines.slice(0, 5) : contentLines;
 
         return (
           <Card
             key={block.id}
-            className={cn("select-none hover:cursor-pointer", block.styling)}
+            className={cn(
+              "group select-none hover:cursor-pointer",
+              block.styling
+            )}
             onClick={() => {
               setSelectedCard(block);
               setIsDialogOpen(true);
@@ -184,10 +199,24 @@ const LeanCanvas = ({ className }: LeanCanvasProps) => {
                 {block.icon} {block.title}
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className={cn("text-sm", { "opacity-40": blockValue === "" })}>
-                {blockValue !== "" ? blockValue : block.description}
-              </p>
+            <CardContent className="pt-2">
+              {hasContent ? (
+                <div className="overflow-hidden">
+                  {displayLines.map((item, index) => (
+                    <p
+                      key={index}
+                      className="overflow-ellipsis break-normal text-sm"
+                    >
+                      {item}
+                    </p>
+                  ))}
+                  {contentLines.length >= 6 && <p>...</p>}
+                </div>
+              ) : (
+                <p className="hidden text-sm opacity-50 group-hover:block">
+                  {block.description}
+                </p>
+              )}
             </CardContent>
           </Card>
         );
@@ -195,26 +224,30 @@ const LeanCanvas = ({ className }: LeanCanvasProps) => {
 
       {selectedCard && (
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogContent>
+          <DialogContent className="h-full bg-zinc-50 sm:h-96 sm:w-128">
             <DialogHeader>
-              <DialogTitle>{selectedCard.title}</DialogTitle>
+              <DialogTitle className="text-zinc-800">
+                {selectedCard.title}
+              </DialogTitle>
               <DialogDescription>{selectedCard.description}</DialogDescription>
             </DialogHeader>
 
             <BlockForm
               blockId={toCamelCase(selectedCard.id) as BlockName}
+              className="h-128 sm:flex-1"
               submitRef={submitButton}
             />
 
             <DialogFooter className="flex-row justify-between">
               <DialogClose asChild>
-                <Button size="sm" variant="outline">
+                <Button size="sm" variant="outline" className="bg-zinc-50">
                   Drop
                 </Button>
               </DialogClose>
 
               <Button
                 size="sm"
+                className="bg-zinc-800 hover:bg-zinc-700"
                 onClick={() => {
                   submitButton.current?.click();
                   setIsDialogOpen(false);
