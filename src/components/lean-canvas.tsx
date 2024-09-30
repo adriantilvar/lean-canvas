@@ -41,7 +41,7 @@ import { useCanvasStore } from "@/stores/canvas-store";
 
 type CanvasBlock = {
   id: string;
-  icon: React.ReactNode;
+  icon: (_className?: string) => JSX.Element;
   title: string;
   description: string;
   theme: string;
@@ -51,7 +51,9 @@ type CanvasBlock = {
 const canvasCards: CanvasBlock[] = [
   {
     id: "problem",
-    icon: <LockKeyhole className="h-3 w-3" />,
+    icon: (className?: string) => (
+      <LockKeyhole className={cn("h-3 w-3", className)} />
+    ),
     title: "Problem",
     description: "List the 1-3 problems",
     theme: "border-pink-200 bg-pink-100 text-pink-950",
@@ -59,7 +61,9 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "existing-alternatives",
-    icon: <Split className="h-3 w-3" />,
+    icon: (className?: string) => (
+      <Split className={cn("h-3 w-3", className)} />
+    ),
     title: "Existing Alternatives",
     description: "List how the problems are solved today",
     theme: "border-pink-200 bg-pink-100 text-pink-950",
@@ -67,7 +71,9 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "solution",
-    icon: <Key className="h-3 w-3 rotate-90" />,
+    icon: (className?: string) => (
+      <Key className={cn("h-3 w-3 rotate-90", className)} />
+    ),
     title: "Solution",
     description: "Outline a possible solution for each problem",
     theme: "border-yellow-200 bg-yellow-100 text-yellow-950",
@@ -75,7 +81,9 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "key-metrics",
-    icon: <ChartLine className="h-3 w-3" />,
+    icon: (className?: string) => (
+      <ChartLine className={cn("h-3 w-3", className)} />
+    ),
     title: "Key Metrics",
     description:
       "List the key numbers that tell you how your business is doing",
@@ -84,7 +92,7 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "unique-value-proposition",
-    icon: <Gem className="h-3 w-3" />,
+    icon: (className?: string) => <Gem className={cn("h-3 w-3", className)} />,
     title: "Unique Value Proposition",
     description:
       "Single, clear, compelling message that states why you are different and worth paying attention",
@@ -93,7 +101,9 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "high-level-concept",
-    icon: <Sparkle className="h-3 w-3" />,
+    icon: (className?: string) => (
+      <Sparkle className={cn("h-3 w-3", className)} />
+    ),
     title: "High Level Concept",
     description: "Write your X for Y analogy",
     theme: "border-violet-200 bg-violet-100 text-violet-950",
@@ -101,7 +111,9 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "unfair-advantage",
-    icon: <Castle className="h-3 w-3" />,
+    icon: (className?: string) => (
+      <Castle className={cn("h-3 w-3", className)} />
+    ),
     title: "Unfair Advantage",
     description: "Something that cannot be easily bought or copied",
     theme: "border-amber-200 bg-amber-100 text-amber-950",
@@ -109,7 +121,9 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "channels",
-    icon: <Route className="h-3 w-3" />,
+    icon: (className?: string) => (
+      <Route className={cn("h-3 w-3", className)} />
+    ),
     title: "Channels",
     description: "Write your path to customers (inbound or outbound)",
     theme: "border-cyan-200 bg-cyan-100 text-cyan-950",
@@ -117,7 +131,9 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "customer-segments",
-    icon: <Users className="h-3 w-3" />,
+    icon: (className?: string) => (
+      <Users className={cn("h-3 w-3", className)} />
+    ),
     title: "Customer Segments",
     description: "List your target customers and users",
     theme: "border-sky-200 bg-sky-100 text-sky-950",
@@ -125,7 +141,9 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "early-adopters",
-    icon: <UserCheck className="h-3 w-3" />,
+    icon: (className?: string) => (
+      <UserCheck className={cn("h-3 w-3", className)} />
+    ),
     title: "Early adopters",
     description: "List the characteristics of your ideal customers",
     theme: "border-sky-200 bg-sky-100 text-sky-950",
@@ -133,7 +151,9 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "cost-structure",
-    icon: <ReceiptText className="h-3 w-3" />,
+    icon: (className?: string) => (
+      <ReceiptText className={cn("h-3 w-3", className)} />
+    ),
     title: "Cost Structure",
     description: "List your fixed and variable costs",
     theme: "border-red-200 bg-red-100 text-red-950",
@@ -141,7 +161,9 @@ const canvasCards: CanvasBlock[] = [
   },
   {
     id: "revenue-streams",
-    icon: <CircleDollarSign className="h-3 w-3" />,
+    icon: (className?: string) => (
+      <CircleDollarSign className={cn("h-3 w-3", className)} />
+    ),
     title: "Revenue Streams",
     description: "List your sources of revenue",
     theme: "border-green-200 bg-green-100 text-green-950",
@@ -198,7 +220,7 @@ const LeanCanvas = ({ className }: LeanCanvasProps) => {
           >
             <CardHeader>
               <CardTitle className="flex items-baseline gap-1 text-sm">
-                {block.icon} {block.title}
+                {block.icon()} {block.title}
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-2">
@@ -226,11 +248,12 @@ const LeanCanvas = ({ className }: LeanCanvasProps) => {
 
       {selectedCard && (
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogContent className={cn("h-96 sm:w-128")}>
+          <DialogContent className={cn("h-[100dvh] sm:h-96 sm:w-128")}>
             <DialogHeader>
-              <DialogTitle>
+              <DialogTitle className="text-xl sm:text-lg">
                 <span className="inline-flex items-center gap-1">
-                  {selectedCard.icon} {selectedCard.title}
+                  {selectedCard.icon("h-5 w-5 sm:h-3 sm:w-3")}{" "}
+                  {selectedCard.title}
                 </span>
               </DialogTitle>
               <DialogDescription>{selectedCard.description}</DialogDescription>
@@ -238,20 +261,22 @@ const LeanCanvas = ({ className }: LeanCanvasProps) => {
 
             <BlockForm
               blockId={toCamelCase(selectedCard.id) as BlockName}
-              className="h-128 sm:flex-1"
+              className="h-96 sm:flex-1"
               submitRef={submitButton}
             />
 
             <DialogFooter className="flex-row justify-between">
               <DialogClose asChild>
-                <Button size="sm" variant="outline">
+                <Button
+                  variant="outline"
+                  className="sm:h-8 sm:rounded-md sm:px-3 sm:text-xs"
+                >
                   Drop
                 </Button>
               </DialogClose>
 
               <Button
-                size="sm"
-                className="bg-zinc-800 hover:bg-zinc-700"
+                className="bg-zinc-800 hover:bg-zinc-700 sm:h-8 sm:rounded-md sm:px-3 sm:text-xs"
                 onClick={() => {
                   submitButton.current?.click();
                   setIsDialogOpen(false);

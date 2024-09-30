@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -25,6 +27,17 @@ type BlockFormProps = {
 const BlockForm = ({ blockId, className, submitRef }: BlockFormProps) => {
   const setBlock = useCanvasStore((state) => state.setBlock);
   const getBlock = useCanvasStore((state) => state.getBlock);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    const textArea = textAreaRef.current;
+
+    if (textArea) {
+      textArea.focus();
+      const length = textArea.value.length;
+      textArea.setSelectionRange(length, length);
+    }
+  }, []);
 
   const blockSchema = z.object({
     [blockId]: z.string().default(""),
@@ -59,6 +72,7 @@ const BlockForm = ({ blockId, className, submitRef }: BlockFormProps) => {
                   {...field}
                   placeholder="Begin writing..."
                   className="flex-1"
+                  ref={textAreaRef}
                 />
               </FormControl>
               <FormMessage />
