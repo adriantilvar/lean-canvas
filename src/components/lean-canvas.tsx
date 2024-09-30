@@ -261,7 +261,7 @@ const LeanCanvas = ({ className }: LeanCanvasProps) => {
 
             <BlockForm
               blockId={toCamelCase(selectedCard.id) as BlockName}
-              className="h-96 sm:flex-1"
+              className="flex-1"
               submitRef={submitButton}
             />
 

@@ -70,8 +70,8 @@ const BlockForm = ({ blockId, className, submitRef }: BlockFormProps) => {
               <FormControl>
                 <Textarea
                   {...field}
-                  placeholder="Begin writing..."
-                  className="flex-1"
+                  placeholder="Start typing..."
+                  className="flex-1 border-none p-0 shadow-none focus-visible:ring-0"
                   ref={textAreaRef}
                 />
               </FormControl>
